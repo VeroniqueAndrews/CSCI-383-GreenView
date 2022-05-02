@@ -3,7 +3,7 @@
   <meta name="mphtools-feature" content="compatibilityUI, cameraPrivacyPopup, compatibilityAutoCheck">
 </head>
 <body>
-  <button style="display: block;  width: 100%; height: 50%;  border: none;  background-color: #1C603B;  color: white;  padding: 14px 28px;  font-size: 16px;  cursor: pointer;  text-align: center;" type="button" id="BeginButton" onclick="initRecog(this)">CLICK before you start</button>
+  <button style="display: block;  width: 100%; height: 50%;  border: none;  background-color: #1C603B;  color: white;  padding: 14px 28px;  font-size: 16px;  cursor: pointer;  text-align: center;" type="button" id="BeginButton" onclick="initRecog(this)">CLICK before you start</button> 
   <style>.embed-container { position: relative; padding-bottom: 56.25%; height: 0; overflow: hidden; max-width: 100%; } .embed-container iframe, .embed-container object, .embed-container embed { position: absolute; top: 0; left: 0; width: 100%; height: 100%; }</style><div class='embed-container'><iframe id= 'vid' src='https://www.youtube.com/embed//fbyK1z1_W4s' frameborder='0' allowfullscreen></iframe></div>
   <p id= 'textBox'>The Guardian's Environment editor Damian Carrington examines exactly how the climate crisis is fuelling devastating floods – and what we can do to help protect ourselves and our planet</p>
   <script src="https://thunkable.github.io/webviewer-extension/thunkableWebviewerExtension.js" type="text/javascript"></script>
@@ -44,12 +44,12 @@ document.getElementById('textBox').innerText  = "Rising sea levels could impact 
 return 'https://www.youtube.com/embed//fp02H6oJFsQ'
 }
 }
-else
+else 
 {
 document.getElementById("BeginButton").textContent = "Click to Finish";
 document.getElementById('BeginButton').style.background='#FFCF00';
-endTracker = true;
-document.getElementById('textBox').innerText  = '';
+endTracker = true; 
+document.getElementById('textBox').innerText  = ''; 
 return ''
 }
 }
@@ -69,3 +69,37 @@ checker = false;
 return;
 }
 document.getElementById('BeginButton').style.background='#FF2B2D';
+
+CY.loader()
+  .licenseKey("ed6a12c60375cfd79dca1cb5dcc58fd0f684c0b62c2c")
+  .addModule(CY.modules().FACE_AGE.name)
+  .addModule(CY.modules().FACE_GENDER.name)
+  .addModule(CY.modules().FACE_EMOTION.name)
+  .load()
+  .then(({ start, stop }) => start());
+  
+window.addEventListener(CY.modules().FACE_EMOTION.eventName, (evt) => {
+if(evt.detail.output.dominantEmotion == "Happy"){
+counters[0] += 1;
+}
+if(evt.detail.output.dominantEmotion == "Sad"){
+counters[1] += 1;
+}
+if(evt.detail.output.dominantEmotion == "Angry"){
+counters[2] += 1;
+}
+if(evt.detail.output.dominantEmotion == "Disgust"){
+counters[3] += 1;
+}
+if(evt.detail.output.dominantEmotion == "Fear"){
+counters[4] += 1;
+}
+});
+checker = true;
+document.getElementById("BeginButton").textContent = 'Next Section';
+//button.style.visibility = "hidden";
+}
+
+</script>
+</body>
+</html>
